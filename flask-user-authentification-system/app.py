@@ -29,14 +29,10 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """
-    Handle user login by verifying credentials and managing sessions.
-    """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        oldpassword =bcrypt.check_password_hash(users[username], password)
-        print(oldpassword)
+
         if username in users and bcrypt.check_password_hash(users[username], password):
             session['user'] = username  # save user session
             return redirect('/dashboard')
